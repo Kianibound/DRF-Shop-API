@@ -8,8 +8,8 @@ from rest_framework.views import APIView
 from rest_framework import generics
 
 
-class ProductListAPIView(generics.ListAPIView):
-    queryset = Product.objects.exclude(stock__gt=0)
+class ProductListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
