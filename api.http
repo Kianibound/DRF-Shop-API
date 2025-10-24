@@ -1,0 +1,39 @@
+GET http://127.0.0.1:8000/products/ HTTP/1.1
+
+###
+
+POST http://127.0.0.1:8000/products/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzA3OTQ0LCJpYXQiOjE3NjEzMDc2NDQsImp0aSI6IjY1NjQ4NTlhMTUxMTRkMzFiYjE5ZjI5MmU2OGMxZGIzIiwidXNlcl9pZCI6IjIifQ.gGCbdSZLIiT6pqhFueJLrUO3S1xOk2KCfw5m5_Tv26I
+
+{
+  "name":"Apple Iphone 16",
+  "price":100.4,
+  "stock":10,
+  "description":"Popular Mobile phone around the world!"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "username":"admin",
+  "password":"test"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/token/refresh/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MTM5NDU1OSwiaWF0IjoxNzYxMzA4MTU5LCJqdGkiOiI2MTIyYjY2ZjhjMjg0ODNiODRiODRmMWJhN2NiYzRmNiIsInVzZXJfaWQiOiIyIn0.EGtAUvzzquvLMnpSfd9kb0UBeAwoyuRX9hjb4ovAEhA"
+}
+
+###
+
+GET http://127.0.0.1:8000/user-orders/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzA3OTQ0LCJpYXQiOjE3NjEzMDc2NDQsImp0aSI6IjY1NjQ4NTlhMTUxMTRkMzFiYjE5ZjI5MmU2OGMxZGIzIiwidXNlcl9pZCI6IjIifQ.gGCbdSZLIiT6pqhFueJLrUO3S1xOk2KCfw5m5_Tv26I
