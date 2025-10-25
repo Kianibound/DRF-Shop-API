@@ -11,6 +11,7 @@ dependencies = [
     "django-silk>=5.4.3",
     "djangorestframework>=3.16.1",
     "djangorestframework-simplejwt>=5.5.1",
+    "drf-spectacular>=0.28.0",
     "pillow>=12.0.0",
     "sqlparse>=0.5.3",
     "tzdata>=2025.2",
