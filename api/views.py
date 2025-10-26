@@ -9,8 +9,8 @@ from rest_framework.views import APIView
 from rest_framework.decorators import action
 
 from api.filters import InStockFilterBackend, OrdersFilter, ProductFilter
-from api.models import Order, Product
-from api.serializers import (OrderSerializer, ProductInfoSerializer,
+from api.models import Order, Product, User
+from api.serializers import (OrderSerializer, ProductInfoSerializer, UserSerializer,
                              ProductSerializer, OrderCreateSerializer)
 
 
@@ -57,7 +57,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     pagination_class = None
     filterset_class = OrdersFilter
     filter_backends = [DjangoFilterBackend]
-    
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
@@ -73,6 +73,11 @@ class OrderViewSet(viewsets.ModelViewSet):
             qs = qs.filter(user=self.request.user)
         return qs
 
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = None
 
 # class OrderListAPIView(generics.ListAPIView):
 #     queryset = Order.objects.prefetch_related('items__product')

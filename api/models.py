@@ -17,10 +17,10 @@ class Product(models.Model):
     @property
     def in_stock(self):
         return self.stock > 0
-    
+
     def __str__(self):
         return self.name
-    
+
 
 class Order(models.Model):
     class StatusChoices(models.TextChoices):
@@ -37,10 +37,11 @@ class Order(models.Model):
         default=StatusChoices.PENDING
     )
 
-    products = models.ManyToManyField(Product, through="OrderItem", related_name='orders')
+    products = models.ManyToManyField(
+        Product, through="OrderItem", related_name='orders')
 
     def __str__(self):
-        return f"Order {self.order_id } by {self.user.username}"
+        return f"Order {self.order_id} by {self.user.username}"
 
 
 class OrderItem(models.Model):
@@ -55,6 +56,6 @@ class OrderItem(models.Model):
     @property
     def item_subtotal(self):
         return self.product.price * self.quantity
-    
+
     def __str__(self):
         return f"{self.quantity} x {self.product.name} in Order {self.order.order_id}"
