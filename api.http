@@ -63,4 +63,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 ###
 
 GET http://127.0.0.1:8000/orders/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzk4MTE5LCJpYXQiOjE3NjEzOTc4MTksImp0aSI6Ijc3NWQzODEyMTNlODRjN2JhMzljMDYzMzFiZTY4MDc2IiwidXNlcl9pZCI6IjEifQ.b8xt_iqY0RZjL0XR4JtYMe7Pf7O25E_HSGWqDZxTDUA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzk4MTE5LCJpYXQiOjE3NjEzOTc4MTksImp0aSI6Ijc3NWQzODEyMTNlODRjN2JhMzljMDYzMzFiZTY4MDc2IiwidXNlcl9pZCI6IjEifQ.b8xt_iqY0RZjL0XR4JtYMe7Pf7O25E_HSGWqDZxTDUAP
+
+
+###
+
+POST http://127.0.0.1:8000/orders/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxNDcxNTYxLCJpYXQiOjE3NjE0NzEyNjEsImp0aSI6IjAyZWI3ZDE4NmFlZjRlNDE5MjMyMDM1ZGFhNDViOTAwIiwidXNlcl9pZCI6IjEifQ.iNOlAbjGnqFJoGJpaYnzjs4VPSU9uvoNu1OyK9Xkow8
+
+{
+  "status":"Pending",
+  "items":[
+    {
+      "product":5,
+      "quantity":3
+    },
+    {
+      "product":1,
+      "quantity":10
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import serializers
 from .models import Product, Order, OrderItem
 
@@ -18,7 +19,7 @@ class ProductSerializer(serializers.ModelSerializer):
                 "Price must be greater than 0."
             )
         return value
-    
+
 
 class OrderItemSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source='product.name')
@@ -35,6 +36,55 @@ class OrderItemSerializer(serializers.ModelSerializer):
             'quantity',
             'item_subtotal'
         )
+
+
+class OrderCreateSerializer(serializers.ModelSerializer):
+    # TODO: Search more about Nested Objects and Nested Serializers
+    class OrderItemCreateSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = OrderItem
+            fields = (
+                'product',
+                'quantity',
+            )
+    order_id = serializers.UUIDField(read_only=True)
+    items = OrderItemCreateSerializer(many=True, required=False)
+
+    def create(self, validated_data):
+        orderitem_data = validated_data.pop('items')
+        order = Order.objects.create(**validated_data)
+
+        for item in orderitem_data:
+            OrderItem.objects.create(order=order, **item)
+
+        return order
+
+    def update(selgf, instance, validated_data):
+        orderitem_data = validated_data.pop('items')
+
+        with transaction.atomic():
+            instance = super().update(instance, validated_data)
+
+            if orderitem_data is not None:
+                # clear existing order items
+                instance.items.all().delete()
+                # recreate order items
+                for item in orderitem_data:
+                    OrderItem.objects.create(order=instance, **item)
+
+            return instance
+
+    class Meta:
+        model = Order
+        fields = (
+            'order_id',
+            'user',
+            'status',
+            'items',
+        )
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }
 
 
 class OrderSerializer(serializers.ModelSerializer):
