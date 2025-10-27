@@ -1,5 +1,7 @@
 from django.db.models import Max
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, generics, viewsets
 from rest_framework.pagination import PageNumberPagination
@@ -27,9 +29,18 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     search_fields = ['name', 'description']
     ordering_fields = ['price', 'name', 'stock']
     pagination_class = PageNumberPagination
-    pagination_class.page_size = 2
+    pagination_class.page_size = 5
     pagination_class.page_size_query_param = 'size'
     pagination_class.max_page_size = 6
+    
+    @method_decorator(cache_page(60 * 15, key_prefix='products_list'))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
+    def get_queryset(self):
+        import time
+        time.sleep(2)
+        return super().get_queryset()
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
