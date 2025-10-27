@@ -10,6 +10,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import action
+from rest_framework.throttling import ScopedRateThrottle
 
 from api.filters import InStockFilterBackend, OrdersFilter, ProductFilter
 from api.models import Order, Product, User
@@ -18,6 +19,8 @@ from api.serializers import (OrderSerializer, ProductInfoSerializer, UserSeriali
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
+    throttle_scope = 'products'
+    throttle_classes = [ScopedRateThrottle]
     queryset = Product.objects.order_by('pk')
     serializer_class = ProductSerializer
     filterset_class = ProductFilter
@@ -63,6 +66,8 @@ class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
+    throttle_scope = 'orders'
+    throttle_classes = [ScopedRateThrottle]
     queryset = Order.objects.prefetch_related('items__product')
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
