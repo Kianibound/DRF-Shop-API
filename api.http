@@ -41,6 +41,16 @@ POST http://127.0.0.1:8000/api/token/ HTTP/1.1
 Content-Type: application/json
 
 {
+  "username":"admin",
+  "password":"test"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
   "username":"Ehsan",
   "password":"test"
 }
@@ -63,7 +73,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 ###
 
 GET http://127.0.0.1:8000/orders/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzk4MTE5LCJpYXQiOjE3NjEzOTc4MTksImp0aSI6Ijc3NWQzODEyMTNlODRjN2JhMzljMDYzMzFiZTY4MDc2IiwidXNlcl9pZCI6IjEifQ.b8xt_iqY0RZjL0XR4JtYMe7Pf7O25E_HSGWqDZxTDUAP
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxNTYzMTQ4LCJpYXQiOjE3NjE1NjI4NDgsImp0aSI6ImJhNjBkYzU5MjJkYzQwOTc5ZDEwZDU5NzYzODlmNzAwIiwidXNlcl9pZCI6IjEifQ.YCjs2Gc0ulzpC3MBcR3kDZs8bDWF-S0I-2x_9GLD2v4
 
 
 ###
