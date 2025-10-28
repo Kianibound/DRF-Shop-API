@@ -142,7 +142,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 5,
-        'DEFAULT_THROTTLE_CLASSES': [
+    'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
 
     ],
@@ -177,3 +177,12 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+# Tell Celery about Redis - Same URL as CACHES setting
+# NOTE: use this command for run celery worker on windows:
+# celery -A shop worker -P solo --loglevel=INFO
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/1"
+
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
